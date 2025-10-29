@@ -9,9 +9,43 @@ class TTTBoard:
         board - a list of '*'s, 'X's & 'O's. 'X's represent moves by player 'X', 'O's
             represent moves by player 'O' and '*'s are spots no one has yet played on
     """
+    def __innit__(self):
+        self.board = ["*","*","*\n","*","*","*\n","*","*","*"]
+    def __str__(self):
+        print(self.board)
+    def make_move(self, player, pos):
+        turn_done = False
         
+        if self.board[pos] == "*" and int(pos) <= 8:
+            self.board[pos] = player
+            turn_done = True
+            return turn_done
+        else:
+            print("try again with another position")
+    def hasWon(self, player):
+        if self.board[0:2] == [player, player, player]:
+            return True
+        if self.board[3:5] == [player, player, player]:
+            return True
+        if self.board[6:8] == [player, player, player]:
+            return True
+        if self.board[0,3,6] == [player, player, player]:   
+            return True
+        if self.board[1,4,7] == [player, player, player]:
+            return True
+        if self.board[2,5,8] == [player, player, player]:
+            return True
+        if self.board[0,4,8] == [player, player, player]:
+            return True
+        if self.board[2,4,6] == [player, player, player]:
+            return True
+    def gameOver(self):
+        if self.hasWon()==True or self.board[0:8] != "*":
+            return True 
+    def clearBoard(self):
+        self.board = ["*","*","*\n","*","*","*\n","*","*","*"]
     pass
-
+    
 
 def play_tic_tac_toe() -> None:
     """Uses your class to play TicTacToe"""
